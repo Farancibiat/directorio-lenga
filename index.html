@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Directorio Lenga — Chiloé</title>
+<meta name="description" content="Directorio turístico de Chiloé: dónde comer, qué hacer, buses, eventos y el mapa ilustrado de Castro. Sitio en desarrollo.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#F5B21E;
+    --accent-dark:#C98E0A;
+    --ink:#2A2A28;
+    --ink-soft:#5B5A55;
+    --cream:#FAF5EA;
+    --paper:#FFFFFF;
+    --green:#5E7A4E;
+    --green-soft:#E6EDDF;
+    --line:#E4DCC8;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;font-size:16px}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* Barra de aviso */
+  .dev-bar{background:var(--ink);color:var(--accent);text-align:center;font-size:13px;font-weight:500;padding:8px 16px;letter-spacing:.02em}
+
+  /* Navegación */
+  header.nav{position:sticky;top:0;z-index:20;background:rgba(250,245,234,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:700;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .logo-mark{width:34px;height:34px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+  .logo-mark svg{width:20px;height:20px}
+  .logo-img{height:42px;width:auto}
+  @media (max-width:760px){.logo-img{height:36px}}
+  .menu{display:flex;gap:22px;list-style:none}
+  .menu a{text-decoration:none;font-size:14px;font-weight:500;color:var(--ink-soft)}
+  .menu a:hover{color:var(--ink)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0}
+
+  /* Jumbotron */
+  .hero{position:relative;overflow:hidden;background:var(--green);color:#fff;padding:96px 0 88px}
+  .hero::before{content:"";position:absolute;inset:0;background:
+      radial-gradient(ellipse at 15% 20%,rgba(245,178,30,.35),transparent 55%),
+      radial-gradient(ellipse at 85% 80%,rgba(255,255,255,.12),transparent 50%);}
+  .hero .wrap{position:relative}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--ink);font-weight:600;font-size:13px;padding:6px 14px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);animation:pulse 1.6s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .hero h1{font-size:clamp(34px,6vw,60px);line-height:1.1;font-weight:700;margin:22px 0 16px;max-width:760px}
+  .hero p.lead{font-size:clamp(16px,2.2vw,19px);max-width:620px;opacity:.92;font-weight:300}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;font-size:15px;padding:13px 24px;border-radius:999px;border:2px solid transparent;cursor:pointer;font-family:inherit}
+  .btn-accent{background:var(--accent);color:var(--ink)}
+  .btn-accent:hover{background:#ffc63d}
+  .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff;background:transparent}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:48px;font-size:14px;opacity:.85}
+  .hero-meta strong{display:block;font-size:22px;font-weight:600;opacity:1}
+  .hero-wave{position:absolute;bottom:-1px;left:0;width:100%;height:60px}
+
+  /* Secciones */
+  section{padding:80px 0;scroll-margin-top:64px}
+  section.alt{background:var(--paper)}
+  .eyebrow{font-size:13px;font-weight:600;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.1em}
+  h2{font-size:clamp(26px,4vw,36px);line-height:1.2;margin:6px 0 12px}
+  .intro{color:var(--ink-soft);max-width:640px;margin-bottom:36px}
+  .soon{display:inline-block;font-size:12px;font-weight:600;background:var(--green-soft);color:var(--green);padding:3px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  section.alt .card{background:var(--cream)}
+  .card h3{font-size:18px;margin-bottom:6px}
+  .card p{color:var(--ink-soft);font-size:15px}
+  .ph{background:repeating-linear-gradient(45deg,#EFE7D4,#EFE7D4 10px,#F6F0E2 10px,#F6F0E2 20px);border-radius:10px;display:grid;place-items:center;color:#A39A82;font-size:13px;font-weight:500}
+  .note{font-size:13px;color:var(--ink-soft);font-style:italic;margin-top:18px}
+
+  /* Directorio */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .chip{border:1px solid var(--line);background:var(--paper);padding:8px 16px;border-radius:999px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;color:var(--ink)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tiers{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px;align-items:start}
+  .ficha{background:var(--paper);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+  .ficha .body{padding:20px}
+  .ficha .tier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+  .ficha h3{font-size:19px;margin:4px 0}
+  .ficha .cat{font-size:13px;color:var(--ink-soft)}
+  .ficha p{font-size:14px;color:var(--ink-soft);margin:10px 0}
+  .ficha .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .ficha .links span{font-size:12px;font-weight:500;border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+  .f-dest{border:2px solid var(--accent);box-shadow:0 10px 30px rgba(201,142,10,.15)}
+  .f-dest .tier{color:var(--accent-dark)}
+  .f-dest .ph{height:180px;border-radius:0}
+  .f-std .tier{color:var(--green)}
+  .f-std .top{display:flex;gap:14px;align-items:center}
+  .f-std .ph{width:64px;height:64px;flex:none}
+  .f-free{opacity:.7;border-style:dashed}
+  .f-free .tier{color:#999}
+  .ref{position:absolute;top:12px;right:12px;background:rgba(42,42,40,.8);color:#fff;font-size:11px;padding:3px 9px;border-radius:999px}
+  .rel{position:relative}
+
+  /* Mapa */
+  .map-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .map-box .ph{aspect-ratio:4/3;font-size:15px}
+
+  /* Buses */
+  table{width:100%;border-collapse:collapse;font-size:15px;background:var(--paper);border-radius:var(--radius);overflow:hidden}
+  th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line)}
+  th{background:var(--ink);color:#fff;font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+  td.muted{color:var(--ink-soft)}
+  .updated{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:16px;font-size:14px;color:var(--ink-soft)}
+  .updated a{font-weight:600;color:var(--green)}
+
+  /* Eventos */
+  .comunas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+  .comunas span{font-size:13px;padding:6px 12px;background:var(--green-soft);color:var(--green);border-radius:999px;font-weight:500}
+  .evento{display:flex;gap:18px}
+  .fecha{flex:none;width:64px;height:70px;border-radius:12px;background:var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;line-height:1}
+  .fecha b{font-size:24px}
+  .fecha small{font-size:12px;text-transform:uppercase;margin-top:4px}
+  .evento .tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--green)}
+
+  /* Fotos */
+  .photo{border-radius:10px;overflow:hidden;background:#EFE7D4}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .map-photo{aspect-ratio:4/5;box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
+  .map-photo img{object-position:center 20%}
+
+  /* Blog */
+  .post .ph,.post .photo{height:180px;margin-bottom:16px}
+
+  /* Contacto */
+  .cta{background:var(--ink);color:#fff;border-radius:22px;padding:56px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+  .cta h2{color:#fff}
+  .cta p{opacity:.8}
+  .cta .eyebrow{color:var(--accent)}
+  .contact-list{list-style:none;display:grid;gap:14px}
+  .contact-list li{display:flex;gap:12px;align-items:center}
+  .contact-list a{text-decoration:none;font-weight:500}
+  .ic{width:38px;height:38px;flex:none;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:var(--ink)}
+  .ic svg{width:18px;height:18px}
+
+  /* Footer — mismo estilo que lengaeditorial.cl */
+  .page{position:relative;z-index:2;background:var(--cream)}
+  .site-footer{
+    --u:min(1px, calc(100vw / 1720));
+    position:sticky;bottom:0;z-index:1;overflow:hidden;
+    height:max(calc(640 * var(--u)), min(calc(996 * var(--u)), calc(100svh - 64px)));
+    background:
+      url(assets/textura-footer.webp) center bottom / cover no-repeat,
+      #2e341a;
+    color:#fff;font-family:"Helvetica Neue","Helvetica","Arial",sans-serif;font-weight:700;
+  }
+  .footer-canvas{height:100%;position:relative}
+  .footer-canvas>*{position:absolute;margin:0;left:calc(50% + (var(--x) - 960) * var(--u));bottom:calc(var(--b) * var(--u))}
+  .footer-logo{--x:182;--b:368;width:calc(406 * var(--u));height:auto}
+  .footer-nav{--x:810;--b:316;display:flex;flex-direction:column;align-items:flex-start;font-size:calc(32.25 * var(--u));line-height:2}
+  .footer-nav a,.footer-mail{text-decoration:none}
+  .footer-nav a{color:#fff;transition:opacity .2s}
+  .footer-nav a:hover{opacity:.75}
+  .footer-contact{--x:1376.4;--b:426;display:flex;flex-direction:column;align-items:center;gap:calc(13 * var(--u));width:calc(310.6 * var(--u))}
+  .footer-contact-title{font-size:calc(25.5 * var(--u));color:#f4f4f2;line-height:1}
+  .footer-mail{display:flex;justify-content:center;align-items:center;width:100%;height:calc(65 * var(--u));background:#fff;color:#000;border:1px solid #000;border-radius:999px;box-shadow:calc(3 * var(--u)) calc(4.5 * var(--u)) 0 #000;font-size:calc(18.2 * var(--u));transition:transform .2s,box-shadow .2s}
+  .footer-mail:hover{transform:translate(calc(1.5 * var(--u)),calc(2.5 * var(--u)));box-shadow:calc(1.5 * var(--u)) calc(2 * var(--u)) 0 #000}
+  .footer-copy{--x:1474;--b:81;font-size:calc(18.7 * var(--u));line-height:1}
+  .footer-nav a:focus-visible,.footer-mail:focus-visible{outline:2px solid #ffbd00;outline-offset:4px}
+  @media (max-width:900px) and (max-height:640px){.site-footer{position:relative}}
+  @media (max-width:560px){
+    .site-footer{height:auto;padding:56px 24px 32px}
+    .footer-canvas{display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center}
+    .footer-canvas>*{position:static}
+    .footer-logo{width:200px}
+    .footer-nav{align-items:center;font-size:20px}
+    .footer-contact{gap:12px;width:min(300px,100%)}
+    .footer-contact-title{font-size:18px}
+    .footer-mail{height:54px;font-size:16px;box-shadow:3px 4.5px 0 #000}
+    .footer-mail:hover{transform:translate(1.5px,2.5px);box-shadow:1.5px 2px 0 #000}
+    .footer-copy{font-size:14px}
+  }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .g3,.g4{grid-template-columns:repeat(2,1fr)}
+    .tiers{grid-template-columns:1fr}
+    .map-box,.cta{grid-template-columns:1fr}
+    .cta{padding:40px 28px}
+  }
+  @media (max-width:760px){
+    .menu{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px solid var(--line)}
+    .menu.open{display:flex}
+    .menu a{display:block;padding:14px 20px;border-top:1px solid var(--line)}
+    .burger{display:block}
+    .g2,.g3,.g4{grid-template-columns:1fr}
+    section{padding:60px 0}
+    .hero{padding:72px 0 76px}
+    table{font-size:14px}
+    th,td{padding:12px}
+    .hide-sm{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="dev-bar">Sitio en construcción · Lo que ves es solamente referencial</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#inicio" class="logo">
+      <img src="assets/logo-directorio-lenga.png" alt="Directorio Lenga" width="1033" height="267" class="logo-img">
+    </a>
+    <button class="burger" aria-label="Abrir menú" onclick="document.querySelector('.menu').classList.toggle('open')"><span></span><span></span><span></span></button>
+    <ul class="menu" onclick="this.classList.remove('open')">
+      <li><a href="#directorio">Directorio</a></li>
+      <li><a href="#mapa">Mapa</a></li>
+      <li><a href="#info">Info práctica</a></li>
+      <li><a href="#buses">Buses</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- JUMBOTRON -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <span class="badge"><span class="dot"></span>Página en desarrollo</span>
+    <h1>Todo Chiloé en tu teléfono, mientras caminas con el mapa en la mano.</h1>
+    <p class="lead">Estamos armando el directorio de Mapa Castro 2027: dónde comer, qué hacer, cómo moverte y qué está pasando en el archipiélago. Abrimos junto al lanzamiento del mapa.</p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-accent">Quiero aparecer en el directorio</a>    </div>
+    <div class="hero-meta">
+      <div><strong>Dic 2026</strong>Lanzamiento</div>
+      <div><strong>16ª edición</strong>Mapa Castro</div>
+      <div><strong>10 comunas</strong>Agenda de eventos</div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 60 480 0 720 25 S 1200 55 1440 20 V60 H0Z" fill="#FAF5EA"/></svg>
+</section>
+
+<!-- DIRECTORIO -->
+<section id="directorio">
+  <div class="wrap">
+    <span class="eyebrow">Directorio</span>
+    <h2>Los lugares del mapa, ahora con su propia ficha</h2>
+    <p class="intro">Cada negocio que aparece en Mapa Castro 2027 tiene su ficha acá, con sus datos, fotos y enlaces. El QR del mapa y del adhesivo de fachada llegan directo a ella.</p>
+
+    <div class="chips" role="tablist">
+      <button class="chip on">Todos</button>
+      <button class="chip">Gastronomía</button>
+      <button class="chip">Actividades y tours</button>
+      <button class="chip">Artesanía y tiendas</button>
+      <button class="chip">Servicios</button>
+      <button class="chip">Alojamiento</button>
+    </div>
+
+    <div class="tiers">
+      <article class="ficha f-dest rel">
+        <span class="ref">Ficha de referencia</span>
+        <div class="ph">Galería de fotos</div>
+        <div class="body">
+          <span class="tier">★ Destacada</span>
+          <h3>Nombre del negocio</h3>
+          <span class="cat">Gastronomía · Castro centro</span>
+          <p>Descripción larga del lugar: qué ofrece, qué lo hace distinto y por qué vale la pena pasar. Aparece primero en su categoría.</p>
+          <div class="links"><span>Sitio web</span><span>Instagram</span><span>WhatsApp</span><span>Cómo llegar</span></div>
+        </div>
+      </article>
+
+      <article class="ficha f-std rel">
+        <span class="ref">Ficha de referencia</span>
+        <div class="body">
+          <div class="top">
+            <div class="ph">Logo</div>
+            <div>
+              <span class="tier">Estándar</span>
+              <h3>Nombre del negocio</h3>
+              <span class="cat">Artesanía · Dalcahue</span>
+            </div>
+          </div>
+          <p>Teléfono, correo y ubicación en el mapa.</p>
+          <div class="links"><span>Llamar</span><span>Ubicación</span></div>
+        </div>
+      </article>
+
+      <article class="ficha f-free rel">
+        <div class="body">
+          <span class="tier">Básica · Próximamente</span>
+          <h3>Nombre del negocio</h3>
+          <span class="cat">Servicios · Ancud</span>
+          <p>Nombre, categoría y ubicación.</p>
+        </div>
+      </article>
+    </div>
+    <p class="note">Las fichas son de referencia y no corresponden a negocios reales.</p>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="alt" id="mapa">
+  <div class="wrap map-box">
+    <div>
+      <span class="eyebrow">Mapa digital</span>
+      <h2>Mapa Castro 2027, para llevar en el bolsillo</h2>
+      <p class="intro">El mismo mapa en acuarela que encuentras en hoteles, restaurantes y puntos de información, en versión digital para descargar e imprimir.</p>
+      <a class="btn btn-dark" href="#contacto" aria-disabled="true">Disponible en diciembre 2026</a>
+    </div>
+    <div class="photo map-photo"><img src="assets/mapa-castro.jpg" alt="Vista previa del mapa ilustrado de Castro" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- INFO PRÁCTICA -->
+<section id="info">
+  <div class="wrap">
+    <span class="eyebrow">Info práctica</span>
+    <h2>Lo que necesitas saber antes de salir</h2>
+    <p class="intro">Información que no pasa de moda, para planificar tu visita a Castro y al resto de la isla.</p>
+    <div class="grid g4">
+      <div class="card"><h3>Cómo llegar</h3><p>Buses, aerolíneas, rent a car y distancias.</p></div>
+      <div class="card"><h3>Puntos de interés</h3><p>Iglesias patrimoniales, palafitos, miradores y ferias.</p></div>
+      <div class="card"><h3>Moverse en la isla</h3><p>Rutas, distancias entre comunas y conexiones a islas menores.</p></div>
+      <div class="card"><h3>Datos útiles</h3><p>Clima, servicios de emergencia, cajeros y oficinas de turismo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSES -->
+<section class="alt" id="buses">
+  <div class="wrap">
+    <span class="eyebrow">Buses</span>
+    <h2>Rutas y horarios desde Castro</h2>
+    <p class="intro">Las rutas principales viven acá. Los horarios cambian seguido, por eso enlazamos a la fuente y te mostramos cuándo lo revisamos por última vez.</p>
+    <table>
+      <thead><tr><th>Ruta</th><th class="hide-sm">Terminal</th><th>Horarios</th></tr></thead>
+      <tbody>
+        <tr><td>Castro – Dalcahue</td><td class="muted hide-sm">Por confirmar</td><td class="muted">Próximamente</td></tr>
+        <tr><td>Castro – Chonchi – Quellón</td><td class="muted hide-sm">Por confirmar</td><td class="muted">Próximamente</td></tr>
+        <tr><td>Castro – Ancud – Puerto Montt</td><td class="muted hide-sm">Por confirmar</td><td class="muted">Próximamente</td></tr>
+        <tr><td>Castro – Parque Nacional Chiloé</td><td class="muted hide-sm">Por confirmar</td><td class="muted">Próximamente</td></tr>
+      </tbody>
+    </table>
+    <div class="updated">
+      <span>Última actualización: —</span>
+      <a href="#contacto">¿Viste un horario que cambió? Avísanos</a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section id="eventos">
+  <div class="wrap">
+    <span class="eyebrow">Eventos</span>
+    <h2>Qué está pasando en Chiloé</h2>
+    <p class="intro">Fiestas costumbristas, cultura, deporte y actividades de clubes en las diez comunas del archipiélago. Cada evento se revisa antes de publicarse.</p>
+    <div class="comunas">
+      <span>Ancud</span><span>Quemchi</span><span>Dalcahue</span><span>Curaco de Vélez</span><span>Quinchao</span><span>Castro</span><span>Chonchi</span><span>Puqueldón</span><span>Queilén</span><span>Quellón</span>
+    </div>
+    <div class="grid g3">
+      <div class="card evento rel"><div class="fecha"><b>--</b><small>Ene</small></div><div><span class="tag">Cultura</span><h3>Evento de ejemplo</h3><p>Comuna · lugar · hora</p></div></div>
+      <div class="card evento rel"><div class="fecha"><b>--</b><small>Feb</small></div><div><span class="tag">Deporte</span><h3>Evento de ejemplo</h3><p>Comuna · lugar · hora</p></div></div>
+      <div class="card evento rel"><div class="fecha"><b>--</b><small>Feb</small></div><div><span class="tag">Clubes</span><h3>Evento de ejemplo</h3><p>Comuna · lugar · hora</p></div></div>
+    </div>
+    <div class="hero-actions" style="margin-top:28px">
+      <a href="#contacto" class="btn btn-dark">¿Organizas algo? Envíanos tu evento</a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="alt" id="blog">
+  <div class="wrap">
+    <span class="eyebrow">Blog</span>
+    <h2>Guías para conocer la isla <span class="soon">Próximamente</span></h2>
+    <p class="intro">Guías para leer antes de llegar o con el café en la mano: recorridos, tradiciones y lugares que vale la pena conocer.</p>
+    <div class="grid g3">
+      <article class="card post"><div class="photo"><img src="assets/castro-web.jpg" alt="Lanchas en la costanera de Castro" loading="lazy"></div><h3>Un día caminando por Castro</h3><p>Recorrido a pie por el centro, la costanera y los palafitos.</p></article>
+      <article class="card post"><div class="photo"><img src="assets/iglesia-web.jpg" alt="Iglesia de madera de Chiloé" loading="lazy"></div><h3>Ruta de las iglesias de Chiloé</h3><p>Cómo organizar la visita a las iglesias patrimoniales.</p></article>
+      <article class="card post"><div class="photo"><img src="assets/comida-web.jpg" alt="Cocina tradicional chilota al fogón" loading="lazy"></div><h3>Qué comer en Chiloé</h3><p>Curanto, milcaos, chapaleles y dónde probarlos.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <span class="eyebrow">Contacto</span>
+        <h2>¿Tienes un negocio en Chiloé y quieres estar en el directorio?</h2>
+        <p>Todos los avisadores de Mapa Castro 2027 tienen su ficha incluida. Escríbenos y te contamos cómo sumarte.</p>
+      </div>
+      <ul class="contact-list">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><a href="mailto:contacto@lengaeditorial.cl">contacto@lengaeditorial.cl</a></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="https://wa.me/56965952545">+56 9 6595 2545</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.page -->
+
+<footer class="site-footer">
+  <div class="footer-canvas">
+    <a href="https://www.lengaeditorial.cl" class="footer-logo" aria-label="Lenga Editorial">
+      <img src="assets/logo-lenga-blanco.svg" alt="Lenga Editorial" width="226" height="63" style="width:100%;height:auto">
+    </a>
+    <nav class="footer-nav" aria-label="Pie de página">
+      <a href="#inicio">Inicio</a>
+      <a href="#directorio">Directorio</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="footer-contact">
+      <span class="footer-contact-title">Contáctanos</span>
+      <a class="footer-mail" href="mailto:contacto@lengaeditorial.cl">contacto@lengaeditorial.cl</a>
+    </div>
+    <p class="footer-copy">© 2026 · Chiloé, Chile</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on')});
+      c.classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>
